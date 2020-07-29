@@ -1,18 +1,24 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>¡Welcome to The Cocktail app!</h1>
+    <p>¿What do you want to search?</p>
+    <select @change="optionChangedHandler($event)">
+      <option value="">Pick a choice</option>
+      <option value="ByName">Search by Name</option>
+      <option value="FirstLetter">Search by first letter</option>
+      <option value="IngredientsList">See all the ingredients</option>
+    </select>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  methods: {
+    optionChangedHandler(event) {
+      this.$router.push({ name: event.target.value });
+    }
   }
 };
 </script>
