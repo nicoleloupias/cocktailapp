@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import IngredientsList from "@/views/IngredientsList.vue";
+import SearchIngredient from "@/views/SearchIngredient.vue";
 import SearchBy from "@/views/SearchBy.vue";
 import FavouritesScreen from "@/views/FavouritesScreen.vue";
 
@@ -25,8 +25,8 @@ const routes = [
   },
   {
     path: "/ingredients",
-    name: "IngredientsList",
-    component: IngredientsList
+    name: "SearchIngredient",
+    component: SearchIngredient
   },
   {
     path: "/favourites",

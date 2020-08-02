@@ -1,9 +1,7 @@
 <template>
-  <div class="Item">
-    <img class="Img" :src="item.img" />
-    <p class="Title">{{ item.title }}</p>
-    <p class="Category">{{ item.category }}</p>
-    <p class="Glass">{{ item.glass }}</p>
+  <div class="Ingredient">
+    <p class="Title">{{ item.name }}</p>
+    <p class="Desc">{{ item.desc }}</p>
     <button v-if="!favourite" @click="favouriteItemHandler">
       Add to favourite
     </button>
@@ -15,21 +13,20 @@
 import VueTypes from "vue-types";
 import { mapMutations } from "vuex";
 export default {
-  name: "Item",
+  name: "Ingredient",
   props: {
     item: VueTypes.shape({
       id: VueTypes.string,
-      img: VueTypes.string,
-      title: VueTypes.string.isRequired,
-      category: VueTypes.string.isRequired,
-      glass: VueTypes.string.isRequired
+      name: VueTypes.string.isRequired,
+      desc: VueTypes.string.isRequired,
+      ingredientType: VueTypes.string.isRequired
     }).loose,
     favourite: VueTypes.bool.def(false)
   },
   methods: {
     ...mapMutations(["addNewFavourite", "deleteFavourite"]),
     favouriteItemHandler() {
-      this.addNewFavourite({ ...this.item, type: "cocktail" });
+      this.addNewFavourite({ ...this.item, type: "ingredient" });
     },
     deleteFavouriteItemHandler() {
       this.deleteFavourite(this.item.id);
@@ -38,7 +35,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.Item {
+.Ingredient {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,15 +47,16 @@ export default {
   p {
     margin: 10px;
   }
-
-  .Img {
-    border: 1px solid rgba(white, 0.4);
-    width: 150px;
-  }
-
   .Title {
     font-weight: bold;
     font-size: 25px;
+  }
+  .Desc {
+    line-height: 1.7;
+    height: 300px;
+    width: 250px;
+    overflow: auto;
+    padding: 10px;
   }
 }
 </style>

@@ -34,7 +34,6 @@ export default {
   },
   computed: {
     searchType() {
-      console.log(this.$route);
       return this.$route.name === "ByName" ? "name" : "firstletter";
     }
   },
@@ -44,8 +43,10 @@ export default {
       const response = await axios.get(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?${search}=${this.query}`
       );
+      console.log(response);
       this.cocktails = response.data.drinks.map(drink => {
         return {
+          id: drink.idDrink,
           img: drink.strDrinkThumb,
           title: drink.strDrink,
           category: drink.strCategory,
@@ -58,14 +59,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 .ItemContainer {
-  margin: auto;
-  width: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 100px;
+  display: grid;
+  grid-template-columns: fit-content(80%);
+  grid-column-gap: 20px;
+  grid-row-gap: 40px;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 100px;
 
-  .Item {
-    margin-left: 20px;
+  @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(3, 220px);
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 250px);
   }
 }
 </style>

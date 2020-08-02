@@ -15,8 +15,17 @@ export default new Vuex.Store({
     },
     addNewFavourite(state, item) {
       state.favourites = [...state.favourites, item];
+    },
+    deleteFavourite(state, id) {
+      state.favourites = [...state.favourites.filter(f => f.id !== id)];
     }
   },
-  actions: {},
-  modules: {}
+  getters: {
+    favouriteCocktails({ favourites }) {
+      return favourites.filter(f => f.type === "cocktail");
+    },
+    favouriteIngredients({ favourites }) {
+      return favourites.filter(f => f.type === "ingredient");
+    }
+  }
 });
