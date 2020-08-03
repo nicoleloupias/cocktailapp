@@ -1,10 +1,9 @@
 <template>
   <div class="home">
     <img src="../assets/logo.png" />
-    <h1>¡Welcome to The Cocktail app! 🍹✨</h1>
-
+    <h1>Welcome to The Cocktail app! 🍹✨</h1>
     <div class="Options">
-      <p>¿What are you looking for?</p>
+      <p>What are you looking for?</p>
       <button @click="optionChangedHandler('ByName')">Search by name</button>
       <button @click="optionChangedHandler('FirstLetter')">
         Search by the first letter
@@ -48,6 +47,7 @@ h1 {
   button {
     background: rgba(white, 0.2);
     box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
+    color: #2b2b2b;
     border-radius: 24px;
     font-size: 15px;
     font-family: "Noto Sans SC";
@@ -56,6 +56,7 @@ h1 {
     margin-top: 20px;
     cursor: pointer;
     transition: all 0.2s ease-in;
+    outline: 0;
 
     &:hover {
       background: rgba(white, 0.4);

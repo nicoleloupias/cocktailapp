@@ -1,11 +1,17 @@
 <template>
   <div class="Ingredient">
-    <p class="Title">{{ item.name }}</p>
+    <p class="Title">{{ item.title }}</p>
     <p class="Desc">{{ item.desc }}</p>
-    <button v-if="!favourite" @click="favouriteItemHandler">
-      Add to favourite
+    <button class="AddBtn" v-if="!favourite" @click="favouriteItemHandler">
+      Add to favourite <font-awesome-icon icon="heart" />
     </button>
-    <button v-if="favourite" @click="deleteFavouriteItemHandler">Delete</button>
+    <button
+      class="DeleteBtn"
+      v-if="favourite"
+      @click="deleteFavouriteItemHandler"
+    >
+      Delete <font-awesome-icon icon="trash" />
+    </button>
   </div>
 </template>
 
@@ -17,7 +23,7 @@ export default {
   props: {
     item: VueTypes.shape({
       id: VueTypes.string,
-      name: VueTypes.string.isRequired,
+      title: VueTypes.string.isRequired,
       desc: VueTypes.string.isRequired,
       ingredientType: VueTypes.string.isRequired
     }).loose,
@@ -29,7 +35,7 @@ export default {
       this.addNewFavourite({ ...this.item, type: "ingredient" });
     },
     deleteFavouriteItemHandler() {
-      this.deleteFavourite(this.item.id);
+      this.deleteFavourite(this.item);
     }
   }
 };
@@ -46,6 +52,7 @@ export default {
 
   p {
     margin: 10px;
+    margin-bottom: 30px;
   }
   .Title {
     font-weight: bold;
@@ -57,6 +64,25 @@ export default {
     width: 250px;
     overflow: auto;
     padding: 10px;
+  }
+
+  .AddBtn,
+  .DeleteBtn {
+    color: white;
+    padding: 12px;
+    border-radius: 24px;
+    box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
+    font-size: 13px;
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+    margin-top: auto;
+  }
+  .AddBtn {
+    background-color: #77c9ef;
+  }
+  .DeleteBtn {
+    background-color: #d68686;
   }
 }
 </style>

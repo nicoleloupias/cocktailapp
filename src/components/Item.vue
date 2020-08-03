@@ -4,10 +4,16 @@
     <p class="Title">{{ item.title }}</p>
     <p class="Category">{{ item.category }}</p>
     <p class="Glass">{{ item.glass }}</p>
-    <button v-if="!favourite" @click="favouriteItemHandler">
-      Add to favourite
+    <button class="AddBtn" v-if="!favourite" @click="favouriteItemHandler">
+      Add to favourite <font-awesome-icon icon="heart" />
     </button>
-    <button v-if="favourite" @click="deleteFavouriteItemHandler">Delete</button>
+    <button
+      class="DeleteBtn"
+      v-if="favourite"
+      @click="deleteFavouriteItemHandler"
+    >
+      Delete <font-awesome-icon icon="trash" />
+    </button>
   </div>
 </template>
 
@@ -32,7 +38,7 @@ export default {
       this.addNewFavourite({ ...this.item, type: "cocktail" });
     },
     deleteFavouriteItemHandler() {
-      this.deleteFavourite(this.item.id);
+      this.deleteFavourite(this.item);
     }
   }
 };
@@ -59,6 +65,38 @@ export default {
   .Title {
     font-weight: bold;
     font-size: 25px;
+  }
+
+  .AddBtn,
+  .DeleteBtn {
+    color: white;
+    padding: 12px;
+    border-radius: 24px;
+    box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
+    font-size: 13px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    outline: 0;
+    margin-top: auto;
+    transition: all 0.2s ease-in;
+  }
+  .AddBtn {
+    background-color: #77c9ef;
+
+    &:hover {
+      color: #2b2b2b;
+      background: transparent;
+      border: 2px solid #77c9ef;
+    }
+  }
+  .DeleteBtn {
+    background-color: #d68686;
+
+    &:hover {
+      color: #2b2b2b;
+      background: transparent;
+      border: 2px solid #d68686;
+    }
   }
 }
 </style>

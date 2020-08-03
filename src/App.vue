@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/favourites">Your favourites</router-link>
     </div>
+    <notifications position="bottom right" classes="notification" />
     <router-view />
   </div>
 </template>
@@ -21,12 +22,12 @@ body {
     rgba(130, 197, 218, 1) 0%,
     rgba(171, 142, 197, 1) 100%
   );
-  min-height: 100vh;
 }
 
 #app {
   font-family: "Noto Sans SC", Helvetica, Arial, sans-serif;
   color: #2b2b2b;
+  min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -74,6 +75,23 @@ h1 {
     &:hover {
       background: rgba(white, 0.4);
     }
+  }
+}
+
+.notification {
+  padding: 20px;
+  font-size: 15px;
+  border-left: 5px solid #187fe7;
+  color: white;
+  margin: 0 5px 5px;
+
+  &.error {
+    background: #e54d42;
+    border-left-color: #b82e24;
+  }
+  &.success {
+    background: #68cd86;
+    border-left-color: #42a85f;
   }
 }
 </style>

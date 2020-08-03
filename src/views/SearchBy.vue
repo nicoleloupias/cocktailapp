@@ -1,10 +1,10 @@
 <template>
   <div class="ByName">
-    <h1 v-if="searchType === 'name'">Search by name</h1>
-    <h1 v-else>Search by the first letter</h1>
+    <h1 class="Title" v-if="searchType === 'name'">Search by name</h1>
+    <h1 class="Title" v-else>Search by the first letter</h1>
     <form @submit.prevent="searchHandler">
-      <input type="text" v-model="query" />
-      <button>Search</button>
+      <input class="SearchBar" type="text" v-model="query" />
+      <button>Search <font-awesome-icon icon="search" /></button>
     </form>
     <div class="ItemContainer">
       <Item
@@ -58,6 +58,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.Title,
+.SearchBar {
+  margin-left: 40px;
+}
+
 .ItemContainer {
   display: grid;
   grid-template-columns: fit-content(80%);

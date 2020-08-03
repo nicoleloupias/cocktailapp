@@ -1,12 +1,11 @@
 <template>
   <div class="Favourites">
-    <h1>Your favourites 💖</h1>
-
+    <h1 class="Title">Your favourites 💖</h1>
     <div class="Container">
       <div class="Cocktails" v-if="favouriteCocktails.length !== 0">
         <h2 class="Heading2">Cocktails</h2>
         <CocktailFilters @update-filter="handleUpdateFilter" />
-        <div class="ItemContainer">
+        <ListContainer tag="transition-group" name="list">
           <Item
             v-for="(item, index) in filteredCocktails"
             :key="index"
@@ -14,11 +13,11 @@
             favourite
             class="Item"
           />
-        </div>
+        </ListContainer>
       </div>
       <div class="Ingredients" v-if="favouriteIngredients.length !== 0">
         <h2 class="Heading2">Ingredients</h2>
-        <div class="IngredientsContainer">
+        <ListContainer tag="transition-group" name="list" item="Ingredients">
           <Ingredient
             v-for="(item, index) in favouriteIngredients"
             :key="index"
@@ -26,7 +25,7 @@
             favourite
             class="Ingredient"
           />
-        </div>
+        </ListContainer>
       </div>
       <div
         class="NoFavourites"
@@ -45,6 +44,7 @@ import { mapState, mapGetters } from "vuex";
 import Item from "@/components/Item.vue";
 import Ingredient from "@/components/Ingredient.vue";
 import CocktailFilters from "@/components/CocktailFilters.vue";
+import ListContainer from "@/components/ListContainer.vue";
 
 export default {
   name: "Favourites",
@@ -52,7 +52,6 @@ export default {
     ...mapState(["favourites"]),
     ...mapGetters(["favouriteCocktails", "favouriteIngredients"]),
     filteredCocktails() {
-      console.log("hola");
       const cocktails = [...this.favouriteCocktails];
       return cocktails.sort((a, b) => {
         if (this.filters.orderBy == "ASC") {
@@ -74,7 +73,8 @@ export default {
   components: {
     Item,
     Ingredient,
-    CocktailFilters
+    CocktailFilters,
+    ListContainer
   },
   methods: {
     handleUpdateFilter(filters) {
@@ -84,45 +84,52 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-h1 {
+.Title {
   text-align: center;
 }
 
 .Container {
   margin: auto;
-  background: #ffffff4a;
-  width: fit-content;
-  padding: 0 30px;
-}
-.ItemContainer,
-.IngredientsContainer {
-  display: grid;
-  grid-template-columns: fit-content(80%);
-  grid-column-gap: 20px;
-  grid-row-gap: 40px;
-  justify-content: center;
+  margin-top: 50px;
+  width: 70%;
 
-  @media screen and (min-width: 700px) {
-    grid-template-columns: repeat(3, 220px);
-  }
   @media screen and (min-width: 1200px) {
-    grid-template-columns: repeat(4, 250px);
+    width: fit-content;
   }
 }
 
-.ItemContainer {
-  margin-bottom: 100px;
+.Ingredients,
+.Cocktails,
+.NoFavourites {
+  background: rgba(white, 0.3);
+  padding: 0 30px;
+  border-radius: 24px;
 }
 
 .Heading2 {
   background: #404040;
   padding: 20px;
   margin: 0 -30px;
+  margin-bottom: 30px;
   color: white;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
 }
 
 .NoFavourites {
   padding: 20px;
   margin-top: 50px;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+}
+.list-enter-active {
+  transition-delay: 0.2s;
 }
 </style>
