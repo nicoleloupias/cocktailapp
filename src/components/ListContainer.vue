@@ -22,18 +22,17 @@ export default {
 <style lang="scss" scoped>
 .ItemContainer,
 .IngredientsContainer {
+  margin-bottom: 100px;
   display: grid;
   grid-template-columns: 300px;
   grid-template-rows: 450px;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
   justify-content: center;
-  padding-bottom: 30px;
+  padding: 30px 0;
 }
 
 .ItemContainer {
-  margin-bottom: 100px;
-  margin-top: 50px;
   @media screen and (min-width: 700px) {
     grid-template-columns: repeat(2, 220px);
   }
