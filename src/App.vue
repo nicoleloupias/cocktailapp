@@ -5,12 +5,24 @@
       <router-link to="/favourites">Your favourites</router-link>
     </div>
     <notifications position="bottom right" classes="notification" />
-    <router-view />
+    <router-view id="Content" />
+    <div id="footer">
+      <p>Copyright © 2020 Made by Nicole Loupias. All Rights Reserved</p>
+      <div class="SocialLinks">
+        <a
+          class="SocialLink"
+          target="_blank"
+          href="https://www.linkedin.com/in/nicole-loupias/"
+          ><font-awesome-icon :icon="['fab', 'linkedin']" size="lg" />
+          <p>Nicole Loupias</p></a
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap");
 
 * {
   margin: 0;
@@ -19,17 +31,20 @@
 body {
   background-image: linear-gradient(
     180deg,
-    rgba(130, 197, 218, 1) 0%,
-    rgba(171, 142, 197, 1) 100%
+    rgb(166, 219, 235) 0%,
+    rgb(171, 142, 197) 100%
   );
 }
 
 #app {
-  font-family: "Noto Sans SC", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   color: #2b2b2b;
   min-height: 100vh;
 }
 
+#Content {
+  min-height: 100vh;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -57,7 +72,7 @@ h1 {
     background: rgba(white, 0.2);
     box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
     border-radius: 24px;
-    font-family: "Noto Sans SC";
+    font-family: "Raleway";
     padding: 10px 20px;
     color: white;
     text-decoration: none;
@@ -65,7 +80,7 @@ h1 {
 
     &.router-link-exact-active {
       color: #2b2b2b;
-      text-decoration: underline;
+      font-weight: bold;
       background: rgba(white, 0.6);
     }
 
@@ -73,7 +88,7 @@ h1 {
       margin-left: 20px;
     }
     &:hover {
-      background: rgba(white, 0.4);
+      background: rgba(black, 0.1);
     }
   }
 }
@@ -92,6 +107,37 @@ h1 {
   &.success {
     background: #68cd86;
     border-left-color: #42a85f;
+  }
+}
+
+#footer {
+  color: white;
+  font-size: 12px;
+  padding: 10px;
+  background-color: rgba(#2b2b2b, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .SocialLinks {
+    .SocialLink {
+      text-decoration: none;
+      color: #a6dbeb;
+      text-shadow: 1px 0px 5px #969696;
+      font-weight: bold;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-left: 5px;
+      }
+    }
+
+    .SocialLink:hover {
+      color: #2b2b2b;
+    }
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png" />
-    <h1>Welcome to The Cocktail app! 🍹✨</h1>
+    <img src="../assets/logo.png" class="Logo" />
+    <h1>The Cocktail app 🍹✨</h1>
     <div class="Options">
-      <p>What are you looking for?</p>
+      <p>Welcome! What are you looking for?</p>
       <button @click="optionChangedHandler('ByName')">Search by name</button>
       <button @click="optionChangedHandler('FirstLetter')">
         Search by the first letter
@@ -33,8 +33,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
+.Logo {
+  max-width: 400px;
+  width: 100%;
+}
 h1 {
   font-size: 40px;
 }
@@ -50,7 +55,7 @@ h1 {
     color: #2b2b2b;
     border-radius: 24px;
     font-size: 15px;
-    font-family: "Noto Sans SC";
+    font-family: "Raleway";
     border: 0;
     padding: 10px 20px;
     margin-top: 20px;

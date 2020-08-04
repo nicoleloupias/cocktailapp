@@ -73,16 +73,29 @@ export default {
     border-radius: 24px;
     box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
     font-size: 13px;
-    border: 0;
+    border: 2px solid transparent;
     cursor: pointer;
     outline: 0;
     margin-top: auto;
+    transition: all 0.2s ease-in;
   }
   .AddBtn {
     background-color: #77c9ef;
+
+    &:hover {
+      color: #2b2b2b;
+      background: transparent;
+      border: 2px solid #77c9ef;
+    }
   }
   .DeleteBtn {
     background-color: #d68686;
+
+    &:hover {
+      color: #2b2b2b;
+      background: transparent;
+      border: 2px solid #d68686;
+    }
   }
 }
 </style>

@@ -40,7 +40,6 @@ export default new Vuex.Store({
   },
   actions: {
     notify(context, payload) {
-      console.log("holaaaa");
       notifier.$notify(payload);
     }
   },

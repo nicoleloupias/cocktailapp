@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import Item from "@/components/Item.vue";
-import Ingredient from "@/components/Ingredient.vue";
 import VueTypes from "vue-types";
 
 export default {
@@ -18,10 +16,6 @@ export default {
   },
   data() {
     return {};
-  },
-  components: {
-    Item,
-    Ingredient
   }
 };
 </script>
@@ -30,6 +24,7 @@ export default {
 .IngredientsContainer {
   display: grid;
   grid-template-columns: 300px;
+  grid-template-rows: 450px;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
   justify-content: center;
@@ -38,8 +33,9 @@ export default {
 
 .ItemContainer {
   margin-bottom: 100px;
+  margin-top: 50px;
   @media screen and (min-width: 700px) {
-    grid-template-columns: repeat(3, 220px);
+    grid-template-columns: repeat(2, 220px);
   }
   @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(4, 250px);
@@ -48,6 +44,9 @@ export default {
 
 .IngredientsContainer {
   @media screen and (min-width: 700px) {
+    grid-template-columns: repeat(1, 300px);
+  }
+  @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(3, 300px);
   }
 }

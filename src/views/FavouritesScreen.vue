@@ -5,7 +5,11 @@
       <div class="Cocktails" v-if="favouriteCocktails.length !== 0">
         <h2 class="Heading2">Cocktails</h2>
         <CocktailFilters @update-filter="handleUpdateFilter" />
-        <ListContainer tag="transition-group" name="list">
+        <ListContainer
+          v-if="filteredCocktails.length !== 0"
+          tag="transition-group"
+          name="list"
+        >
           <Item
             v-for="(item, index) in filteredCocktails"
             :key="index"
@@ -14,6 +18,9 @@
             class="Item"
           />
         </ListContainer>
+        <div class="NoCocktails" v-else>
+          <p>You don't have any cocktail with those features.</p>
+        </div>
       </div>
       <div class="Ingredients" v-if="favouriteIngredients.length !== 0">
         <h2 class="Heading2">Ingredients</h2>
@@ -33,7 +40,11 @@
           favouriteIngredients.length === 0 && favouriteCocktails.length === 0
         "
       >
-        You don't have any favourites yet!
+        <p>You don't have any favourites yet!</p>
+        <p>
+          Go to the Home section and search some cocktails and ingredients
+          first. ✨
+        </p>
       </div>
     </div>
   </div>
@@ -53,20 +64,35 @@ export default {
     ...mapGetters(["favouriteCocktails", "favouriteIngredients"]),
     filteredCocktails() {
       const cocktails = [...this.favouriteCocktails];
-      return cocktails.sort((a, b) => {
-        if (this.filters.orderBy == "ASC") {
-          return a.title - b.title;
-        } else if (this.filters.orderBy == "DESC") {
-          return b.title - a.title;
-        }
-        return 0;
-      });
+      return cocktails
+        .sort((a, b) => {
+          if (this.filters.orderBy == "ASC") {
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          } else if (this.filters.orderBy == "DESC") {
+            if (a.title > b.title) return -1;
+            if (a.title < b.title) return 1;
+            return 0;
+          }
+          return 0;
+        })
+        .filter(cocktail => {
+          if (this.filters.glassType) {
+            return (
+              cocktail.glass.toLowerCase() ===
+              this.filters.glassType.toLowerCase()
+            );
+          }
+          return cocktail;
+        });
     }
   },
   data() {
     return {
       filters: {
-        orderBy: ""
+        orderBy: "",
+        glassType: ""
       }
     };
   },
@@ -91,7 +117,11 @@ export default {
 .Container {
   margin: auto;
   margin-top: 50px;
-  width: 70%;
+  width: 90%;
+
+  @media screen and (min-width: 700px) {
+    width: 70%;
+  }
 
   @media screen and (min-width: 1200px) {
     width: fit-content;
@@ -99,11 +129,17 @@ export default {
 }
 
 .Ingredients,
-.Cocktails,
-.NoFavourites {
+.Cocktails {
   background: rgba(white, 0.3);
   padding: 0 30px;
   border-radius: 24px;
+}
+
+.NoFavourites {
+  background-color: rgba(#edc68b, 0.8);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
 }
 
 .Heading2 {
@@ -119,6 +155,17 @@ export default {
 .NoFavourites {
   padding: 20px;
   margin-top: 50px;
+}
+
+.NoCocktails {
+  padding: 30px;
+
+  @media screen and (min-width: 700px) {
+    width: 450px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 1000px;
+  }
 }
 
 .list-enter-active,
