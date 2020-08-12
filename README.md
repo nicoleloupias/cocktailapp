@@ -1,5 +1,5 @@
 # cocktailapp
-
+Proyecto hecho con VueJS.
 ## Project setup
 ```
 npm install
