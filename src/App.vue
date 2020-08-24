@@ -10,7 +10,9 @@
       position="bottom right"
       classes="notification"
     />
-    <router-view id="Content" />
+    <transition name="fade" mode="out-in">
+      <router-view id="Content" />
+    </transition>
     <footer>
       <p>
         Made by
@@ -163,5 +165,16 @@ footer {
       margin-top: 10px;
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.4s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
