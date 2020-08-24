@@ -76,6 +76,7 @@ export default {
   .Title {
     font-weight: bold;
     font-size: 25px;
+    text-align: center;
   }
 
   .AddBtn,

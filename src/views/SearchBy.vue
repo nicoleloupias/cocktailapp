@@ -42,14 +42,14 @@
       />
     </div>
 
-    <div class="ItemContainer">
+    <ListContainer tag="transition-group" name="list">
       <Item
-        v-for="(item, index) in cocktails"
-        :key="index"
+        v-for="item in cocktails"
+        :key="item.id"
         :item="item"
         class="Item"
       />
-    </div>
+    </ListContainer>
   </div>
 </template>
 
@@ -58,6 +58,7 @@ import axios from "axios";
 import Item from "@/components/Item.vue";
 import InstructionCard from "@/components/InstructionCard.vue";
 import LettersContainer from "@/components/LettersContainer.vue";
+import ListContainer from "@/components/ListContainer.vue";
 
 export default {
   name: "SearchBy",
@@ -76,7 +77,8 @@ export default {
   components: {
     Item,
     InstructionCard,
-    LettersContainer
+    LettersContainer,
+    ListContainer
   },
   computed: {
     searchType() {
@@ -209,5 +211,16 @@ export default {
   @media screen and (min-width: 700px) {
     max-width: 500px;
   }
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+}
+.list-enter-active {
+  transition-delay: 0.2s;
 }
 </style>

@@ -41,9 +41,8 @@
           item="Ingredients"
         >
           <Ingredient
-            v-for="(item,
-            index) in favouriteIngredients"
-            :key="index"
+            v-for="item in favouriteIngredients"
+            :key="item.id"
             :item="item"
             favourite
             class="Ingredient"
@@ -188,7 +187,6 @@ export default {
     width: 1000px;
   }
 }
-
 .list-enter-active,
 .list-leave-active {
   transition: all 0.2s;
