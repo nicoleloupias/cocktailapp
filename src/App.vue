@@ -48,7 +48,7 @@
 }
 
 body {
-  background-color: #e2a1a7;
+  background-color: #f99e9d;
 }
 
 #app {
