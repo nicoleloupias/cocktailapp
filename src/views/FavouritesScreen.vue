@@ -179,6 +179,7 @@ export default {
 
 .NoCocktails {
   padding: 30px;
+  margin-bottom: 50px;
 
   @media screen and (min-width: 700px) {
     width: 450px;
