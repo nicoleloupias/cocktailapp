@@ -4,8 +4,13 @@
     <p class="Title">{{ item.title }}</p>
     <p class="Category">{{ item.category }}</p>
     <p class="Glass">{{ item.glass }}</p>
-    <button class="AddBtn" v-if="!favourite" @click="favouriteItemHandler">
-      Add to favourite <font-awesome-icon icon="heart" />
+    <button
+      class="AddBtn"
+      v-if="!favourite"
+      @click="favouriteItemHandler"
+    >
+      Add to favourite
+      <font-awesome-icon icon="heart" />
     </button>
     <button
       class="DeleteBtn"
@@ -33,9 +38,15 @@ export default {
     favourite: VueTypes.bool.def(false)
   },
   methods: {
-    ...mapMutations(["addNewFavourite", "deleteFavourite"]),
+    ...mapMutations([
+      "addNewFavourite",
+      "deleteFavourite"
+    ]),
     favouriteItemHandler() {
-      this.addNewFavourite({ ...this.item, type: "cocktail" });
+      this.addNewFavourite({
+        ...this.item,
+        type: "cocktail"
+      });
     },
     deleteFavouriteItemHandler() {
       this.deleteFavourite(this.item);
@@ -69,7 +80,6 @@ export default {
 
   .AddBtn,
   .DeleteBtn {
-    color: white;
     padding: 12px;
     border-radius: 24px;
     box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
@@ -81,12 +91,12 @@ export default {
     transition: all 0.2s ease-in;
   }
   .AddBtn {
-    background-color: #77c9ef;
+    background-color: #dde8fd;
 
     &:hover {
       color: #2b2b2b;
       background: transparent;
-      border: 2px solid #77c9ef;
+      border: 2px solid #dde8fd;
     }
   }
   .DeleteBtn {

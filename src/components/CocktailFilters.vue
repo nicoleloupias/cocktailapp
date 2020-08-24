@@ -78,6 +78,9 @@ export default {
     &:focus {
       outline: 0;
     }
+    @media screen and (max-width: 700px) {
+      margin-bottom: 10px;
+    }
   }
 }
 </style>

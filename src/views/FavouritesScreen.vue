@@ -2,9 +2,14 @@
   <div class="Favourites">
     <h1 class="Title">Your favourites 💖</h1>
     <div class="Container">
-      <div class="Cocktails" v-if="favouriteCocktails.length !== 0">
+      <div
+        class="Cocktails"
+        v-if="favouriteCocktails.length !== 0"
+      >
         <h2 class="Heading2">Cocktails</h2>
-        <CocktailFilters @update-filter="handleUpdateFilter" />
+        <CocktailFilters
+          @update-filter="handleUpdateFilter"
+        />
         <ListContainer
           v-if="filteredCocktails.length !== 0"
           tag="transition-group"
@@ -19,14 +24,25 @@
           />
         </ListContainer>
         <div class="NoCocktails" v-else>
-          <p>You don't have any cocktail with those features.</p>
+          <p>
+            You don't have any cocktail with those
+            features.
+          </p>
         </div>
       </div>
-      <div class="Ingredients" v-if="favouriteIngredients.length !== 0">
+      <div
+        class="Ingredients"
+        v-if="favouriteIngredients.length !== 0"
+      >
         <h2 class="Heading2">Ingredients</h2>
-        <ListContainer tag="transition-group" name="list" item="Ingredients">
+        <ListContainer
+          tag="transition-group"
+          name="list"
+          item="Ingredients"
+        >
           <Ingredient
-            v-for="(item, index) in favouriteIngredients"
+            v-for="(item,
+            index) in favouriteIngredients"
             :key="index"
             :item="item"
             favourite
@@ -37,13 +53,14 @@
       <div
         class="NoFavourites"
         v-if="
-          favouriteIngredients.length === 0 && favouriteCocktails.length === 0
+          favouriteIngredients.length === 0 &&
+            favouriteCocktails.length === 0
         "
       >
         <p>You don't have any favourites yet!</p>
         <p>
-          Go to the Home section and search some cocktails and ingredients
-          first. ✨
+          Go to the Home section and search some
+          cocktails and ingredients first. ✨
         </p>
       </div>
     </div>
@@ -61,7 +78,10 @@ export default {
   name: "Favourites",
   computed: {
     ...mapState(["favourites"]),
-    ...mapGetters(["favouriteCocktails", "favouriteIngredients"]),
+    ...mapGetters([
+      "favouriteCocktails",
+      "favouriteIngredients"
+    ]),
     filteredCocktails() {
       const cocktails = [...this.favouriteCocktails];
       return cocktails
@@ -136,7 +156,7 @@ export default {
 }
 
 .NoFavourites {
-  background-color: rgba(#edc68b, 0.8);
+  background-color: rgba(#f9d1a9, 0.8);
   border-radius: 24px;
   padding: 20px;
   box-shadow: 1px 0px 4px 0px rgba(black, 0.1);

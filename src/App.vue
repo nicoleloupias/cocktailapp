@@ -2,22 +2,39 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/favourites">Your favourites</router-link>
+      <router-link to="/favourites"
+        >Your favourites</router-link
+      >
     </div>
-    <notifications position="bottom right" classes="notification" />
+    <notifications
+      position="bottom right"
+      classes="notification"
+    />
     <router-view id="Content" />
-    <div id="footer">
-      <p>Copyright © 2020 Made by Nicole Loupias. All Rights Reserved</p>
+    <footer>
+      <p>
+        Made by
+        <a
+          href="https://www.nicoleloupias.com/"
+          target="_blank"
+        >
+          Nicole Loupias.
+        </a>
+      </p>
       <div class="SocialLinks">
         <a
           class="SocialLink"
           target="_blank"
           href="https://www.linkedin.com/in/nicole-loupias/"
-          ><font-awesome-icon :icon="['fab', 'linkedin']" size="lg" />
-          <p>Nicole Loupias</p></a
         >
+          <font-awesome-icon
+            :icon="['fab', 'linkedin']"
+            size="lg"
+          />
+          <p>Nicole Loupias</p>
+        </a>
       </div>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -29,11 +46,7 @@
 }
 
 body {
-  background-image: linear-gradient(
-    180deg,
-    rgb(166, 219, 235) 0%,
-    rgb(171, 142, 197) 100%
-  );
+  background-color: #e2a1a7;
 }
 
 #app {
@@ -43,7 +56,7 @@ body {
 }
 
 #Content {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -110,7 +123,7 @@ h1 {
   }
 }
 
-#footer {
+footer {
   color: white;
   font-size: 12px;
   padding: 10px;
@@ -118,6 +131,13 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  a {
+    color: white;
+  }
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 
   .SocialLinks {
     .SocialLink {
@@ -137,6 +157,10 @@ h1 {
 
     .SocialLink:hover {
       color: #2b2b2b;
+    }
+
+    @media screen and (max-width: 700px) {
+      margin-top: 10px;
     }
   }
 }

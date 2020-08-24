@@ -1,21 +1,45 @@
 <template>
-  <div class="ByName">
-    <h1 class="Title" v-if="searchType === 'name'">Search by name</h1>
-    <h1 class="Title" v-else>Search by the first letter</h1>
+  <div>
+    <h1 class="Title">
+      Search by
+      {{
+        searchType === "name"
+          ? "name"
+          : "the first letter"
+      }}
+    </h1>
     <div class="SearchContainer">
       <InstructionCard
+        v-if="searchType === 'name'"
         :examples="instructions"
         class="InstructionCard"
-      ></InstructionCard>
-      <form @submit.prevent="searchHandler">
+      />
+      <InstructionCard v-else class="InstructionCard">
+        <template #title>
+          <p>
+            Click on one of these letters
+          </p>
+        </template>
+      </InstructionCard>
+      <form
+        @submit.prevent="searchName"
+        v-if="searchType === 'name'"
+      >
         <input
           class="SearchBar"
           type="text"
           v-model="query"
           placeholder="Search"
         />
-        <button class="SearchBtn"><font-awesome-icon icon="search" /></button>
+        <button class="SearchBtn">
+          <font-awesome-icon icon="search" />
+        </button>
       </form>
+      <LettersContainer
+        class="LettersContainer"
+        @letterClicked="searchFirstLetter"
+        v-else
+      />
     </div>
 
     <div class="ItemContainer">
@@ -33,6 +57,7 @@
 import axios from "axios";
 import Item from "@/components/Item.vue";
 import InstructionCard from "@/components/InstructionCard.vue";
+import LettersContainer from "@/components/LettersContainer.vue";
 
 export default {
   name: "SearchBy",
@@ -40,17 +65,24 @@ export default {
     return {
       query: "",
       cocktails: [],
-      COCKTAIL_EXAMPLES: ["Margarita", "Piña Colada", "Rose"],
+      COCKTAIL_EXAMPLES: [
+        "Margarita",
+        "Piña Colada",
+        "Rose"
+      ],
       LETTER_EXAMPLES: ["A", "R", "P"]
     };
   },
   components: {
     Item,
-    InstructionCard
+    InstructionCard,
+    LettersContainer
   },
   computed: {
     searchType() {
-      return this.$route.name === "ByName" ? "name" : "firstletter";
+      return this.$route.name === "ByName"
+        ? "name"
+        : "firstletter";
     },
     instructions() {
       return this.searchType === "name"
@@ -59,20 +91,30 @@ export default {
     }
   },
   methods: {
-    async searchHandler() {
-      const search = this.searchType === "name" ? "s" : "f";
+    searchFirstLetter(letter) {
+      this.getData("f", letter);
+    },
+    searchName() {
+      this.getData("s", this.query);
+    },
+    async getData(searchType, query) {
       const response = await axios.get(
-        `https://www.thecocktaildb.com/api/json/v1/1/search.php?${search}=${this.query}`
+        `https://www.thecocktaildb.com/api/json/v1/1/search.php?${searchType}=${query}`
       );
-      this.cocktails = response.data.drinks.map(drink => {
-        return {
-          id: drink.idDrink,
-          img: drink.strDrinkThumb,
-          title: drink.strDrink,
-          category: drink.strCategory,
-          glass: drink.strGlass
-        };
-      });
+      this.handleData(response);
+    },
+    handleData(response) {
+      this.cocktails = response.data.drinks.map(
+        drink => {
+          return {
+            id: drink.idDrink,
+            img: drink.strDrinkThumb,
+            title: drink.strDrink,
+            category: drink.strCategory,
+            glass: drink.strGlass
+          };
+        }
+      );
     }
   }
 };
@@ -110,7 +152,7 @@ export default {
   font-size: 14px;
   line-height: 18px;
   border-radius: 50px;
-  border: 1px solid white;
+  border: 0;
   transition: all 0.3s ease-in-out;
   box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
 
@@ -121,9 +163,8 @@ export default {
   &:focus {
     padding: 12px 24px;
     outline: 0;
-    border: 1px solid transparent;
-    border-bottom: 1px solid white;
     border-radius: 0;
+    box-shadow: 1px 0px 4px 0px rgba(black, 0.3);
   }
 
   @media screen and (min-width: 700px) {
@@ -144,7 +185,7 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 800px) {
     flex-direction: row;
     justify-content: center;
   }
@@ -156,6 +197,17 @@ export default {
   @media screen and (min-width: 700px) {
     margin-bottom: 0px;
     margin-right: 20px;
+  }
+}
+.LettersContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 300px;
+
+  @media screen and (min-width: 700px) {
+    max-width: 500px;
   }
 }
 </style>

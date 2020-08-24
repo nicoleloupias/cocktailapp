@@ -13,7 +13,9 @@
           v-model="query"
           placeholder="Search"
         />
-        <button class="SearchBtn"><font-awesome-icon icon="search" /></button>
+        <button class="SearchBtn">
+          <font-awesome-icon icon="search" />
+        </button>
       </form>
     </div>
     <div class="ItemContainer">
@@ -50,14 +52,16 @@ export default {
       const response = await axios.get(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${this.query}`
       );
-      this.ingredients = response.data.ingredients.map(i => {
-        return {
-          id: i.idIngredient,
-          title: i.strIngredient,
-          desc: i.strDescription,
-          ingredientType: i.strType
-        };
-      });
+      this.ingredients = response.data.ingredients.map(
+        i => {
+          return {
+            id: i.idIngredient,
+            title: i.strIngredient,
+            desc: i.strDescription,
+            ingredientType: i.strType
+          };
+        }
+      );
     }
   }
 };
@@ -85,7 +89,7 @@ export default {
   font-size: 14px;
   line-height: 18px;
   border-radius: 50px;
-  border: 1px solid white;
+  border: 0;
   transition: all 0.3s ease-in-out;
   box-shadow: 1px 0px 4px 0px rgba(black, 0.1);
 
@@ -96,9 +100,8 @@ export default {
   &:focus {
     padding: 12px 24px;
     outline: 0;
-    border: 1px solid transparent;
-    border-bottom: 1px solid white;
     border-radius: 0;
+    box-shadow: 1px 0px 4px 0px rgba(black, 0.3);
   }
 
   @media screen and (min-width: 700px) {
