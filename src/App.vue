@@ -23,19 +23,6 @@
           Nicole Loupias.
         </a>
       </p>
-      <div class="SocialLinks">
-        <a
-          class="SocialLink"
-          target="_blank"
-          href="https://www.linkedin.com/in/nicole-loupias/"
-        >
-          <font-awesome-icon
-            :icon="['fab', 'linkedin']"
-            size="lg"
-          />
-          <p>Nicole Loupias</p>
-        </a>
-      </div>
     </footer>
   </div>
 </template>
