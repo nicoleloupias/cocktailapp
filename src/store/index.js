@@ -17,10 +17,13 @@ export default new Vuex.Store({
       Object.assign(state, initialState);
     },
     addNewFavourite(state, item) {
-      if (state.favourites.find(f => f.id === item.id)) {
+      if (
+        state.favourites.find(f => f.id === item.id)
+      ) {
         this.dispatch("notify", {
           type: "error",
-          text: "You alredy have this element in your favourites."
+          text:
+            "You alredy have this element in your favourites."
         });
       } else {
         state.favourites = [...state.favourites, item];
@@ -31,7 +34,11 @@ export default new Vuex.Store({
       }
     },
     deleteFavourite(state, item) {
-      state.favourites = [...state.favourites.filter(f => f.id !== item.id)];
+      state.favourites = [
+        ...state.favourites.filter(
+          f => f.id !== item.id
+        )
+      ];
       this.dispatch("notify", {
         type: "success",
         text: `${item.title} was deleted succesfully.`
@@ -45,10 +52,14 @@ export default new Vuex.Store({
   },
   getters: {
     favouriteCocktails({ favourites }) {
-      return favourites.filter(f => f.type === "cocktail");
+      return favourites.filter(
+        f => f.type === "cocktail"
+      );
     },
     favouriteIngredients({ favourites }) {
-      return favourites.filter(f => f.type === "ingredient");
+      return favourites.filter(
+        f => f.type === "ingredient"
+      );
     }
   }
 });

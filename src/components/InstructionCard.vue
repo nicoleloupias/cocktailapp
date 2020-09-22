@@ -6,7 +6,7 @@
         <p>Some examples you can search:</p>
       </slot>
       <slot name="content">
-        <ul>
+        <ul v-if="examples">
           <li
             v-for="example in examples"
             :key="example"
